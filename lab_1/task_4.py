@@ -1,4 +1,4 @@
-# import numpy as n
+import numpy as np
 import sys
 
 
@@ -150,7 +150,6 @@ def invert_matrix(A, tol=None):
                 AM[i][j] = AM[i][j] - crScaler * AM[fd][j]
                 IM[i][j] = IM[i][j] - crScaler * IM[fd][j]
 
-    # Section 4: Make sure that IM is an inverse of A within the specified tolerance
     if check_matrix_equality(I, matrix_multiply(A, IM), tol):
         return IM
     else:
@@ -164,14 +163,12 @@ try:
     matrix = [[int(i) for i in line.strip().split()] for line in sys.stdin.read().strip().split('\n')]
     check_matrix(matrix)
     print('Inversed matrix by me:')
-    print_matrix(matrix)
-    # print('Inversed matrix by numpy: ')
-    # for line in np.linalg.inv(np.array(matrix)):
-    #     for i in line:
-    #         print(i, end=' ')
-    #     print()
+    print_matrix(invert_matrix(matrix))
+    print('Inversed matrix by numpy: ')
+    for line in np.linalg.inv(np.array(matrix)):
+        for i in line:
+            print(round(int(i), 1), end=' ')
+        print()
 except ValueError:
     print('Invalid input format!')
-except TypeError:
-    print('Invalid matrix format!')
 sys.exit(0)
