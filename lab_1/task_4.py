@@ -1,5 +1,6 @@
-# import numpy as n
+import numpy as np
 import sys
+import timeit
 
 
 def check_matrix(m):
@@ -140,7 +141,7 @@ def invert_matrix(A, tol=None):
 
     indices = list(range(n))
     for fd in range(n):
-        fdScaler = 1, 0 / AM[fd][fd]
+        fdScaler = 1 / AM[fd][fd]
         for j in range(n):
             AM[fd][j] *= fdScaler
             IM[fd][j] *= fdScaler
@@ -150,7 +151,6 @@ def invert_matrix(A, tol=None):
                 AM[i][j] = AM[i][j] - crScaler * AM[fd][j]
                 IM[i][j] = IM[i][j] - crScaler * IM[fd][j]
 
-    # Section 4: Make sure that IM is an inverse of A within the specified tolerance
     if check_matrix_equality(I, matrix_multiply(A, IM), tol):
         return IM
     else:
@@ -161,17 +161,19 @@ print('Please, enter 3x3 matrix in the following format (for example):'
       '\n1 2 3\n4 5 6\n7 8 9 (press Enter and Ctrl+D to finish)')
 
 try:
-    matrix = [[int(i) for i in line.strip().split()] for line in sys.stdin.read().strip().split('\n')]
+    matrix = [[float(i) for i in line.strip().split()] for line in sys.stdin.read().strip().split('\n')]
     check_matrix(matrix)
     print('Inversed matrix by me:')
-    print_matrix(matrix)
-    # print('Inversed matrix by numpy: ')
-    # for line in np.linalg.inv(np.array(matrix)):
-    #     for i in line:
-    #         print(i, end=' ')
-    #     print()
+    start_time = timeit.default_timer()
+    print_matrix(invert_matrix(matrix))
+    invert_matrix(matrix)
+    result = timeit.default_timer() - start_time
+    print(f'The execution time of my inversion: {round(result, 5)}s.')
+    print('Inversed matrix by numpy: ')
+    print_matrix(np.linalg.inv(np.array(matrix)))
+    start_time = timeit.default_timer()
+    np.linalg.inv(matrix)
+    result = timeit.default_timer() - start_time
+    print(f'The execution time of numpy inversion: {round(result, 5)}s.')
 except ValueError:
     print('Invalid input format!')
-except TypeError:
-    print('Invalid matrix format!')
-sys.exit(0)

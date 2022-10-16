@@ -43,73 +43,42 @@ def rank(A, max_rank):
             m1, m2 = [], []
             for i in range(2):
                 m1.append(A[i][:3])
-            for i in range(2):
                 m2.append(A[i][1:])
             if det(m1, 2) or det(m2, 2):
                 return 2
-            return 2
+            return 1
     elif max_rank == 3:
         if not det(A, 1):
             return 0
-        if len(A) == len(A[0]) == 3:
-            if det(A, 3):
-                return 3
-            m1, m2, m3, m4 = [], [], [], []
-            for i in range(2):
-                m1.append(A[i][:3])
-                m2.append(A[i][1:])
-            for i in range(1, 3):
-                m3.append(A[i][:3])
-                m4.append(A[i][1:])
-            if det(m1, 2) or det(m2, 2) or det(m3, 2) or det(m4, 2):
+        if det(A, 3):
+            return 3
+        matrices = [[] for i in range(9)]
+        for i in range(1, 3):
+            matrices[0].append(A[i][1:])
+            matrices[1].append(A[i][::2])
+            matrices[2].append(A[i][:2])
+        for i in (0, 2):
+            matrices[3].append(A[i][1:])
+            matrices[4].append(A[i][::2])
+            matrices[5].append(A[i][:2])
+        for i in range(2):
+            matrices[6].append(A[i][1:])
+            matrices[7].append(A[i][::2])
+            matrices[8].append(A[i][:2])
+        for m in matrices:
+            if det(m, 2):
                 return 2
-            return 1
-        if len(A) == 4:
-            if det(A[:3], 3) or det(A[1:], 3):
-                return 3
-            m1, m2, m3, m4, m5, m6 = [], [], [], [], [], []
-            for i in range(2):
-                m1.append(A[i][:2])
-                m2.append(A[i][1:])
-            for i in range(1, 3):
-                m3.append(A[i][:2])
-                m4.append(A[i][1:])
-            for i in range(2, 4):
-                m5.append(A[i][:2])
-                m6.append(A[i][1:])
-            if det(m1, 2) or det(m2, 2) or det(m3, 2) or det(m4, 2) or det(m5, 2) or det(m6, 2):
-                return 2
-            return 1
-        if len(A[0]) == 4:
-            m1, m2 = [], []
-            for i in range(3):
-                m1.append(A[i][:3])
-            for i in range(3):
-                m2.append(A[i][1:])
-            if det(m1, 3) or det(m2, 3):
-                return 3
-            m4, m5, m6, m7, m8, m9 = [], [], [], [], [], []
-            for i in range(2):
-                m4.append(A[i][:2])
-                m5.append(A[i][1:])
-                m6.append(A[i][2:])
-            for i in range(1, 3):
-                m7.append(A[i][:2])
-                m8.append(A[i][1:])
-                m9.append(A[i][2:])
-            if det(m4, 2) or det(m5, 2) or det(m6, 2) or det(m7, 2) or det(m8, 2) or det(m9, 2):
-                return 2
-            return 1
+        return 1
 
 
 def transpose(A):
-    t_matrix = []
+    t_A = []
     for i in range(len(A[0])):
-        new_line = []
-        for line in A:
-            new_line.append(line[i])
-        t_matrix.append(new_line)
-    return t_matrix
+        new_row = []
+        for row in A:
+            new_row.append(row[i])
+        t_A.append(new_row)
+    return t_A
 
 
 def zeros_matrix(rows, cols):
@@ -118,7 +87,6 @@ def zeros_matrix(rows, cols):
         M.append([])
         while len(M[-1]) < cols:
             M[-1].append(0.0)
-
     return M
 
 
@@ -154,7 +122,7 @@ print('Please, enter two matrices in the following format (for example):'
       '\n-1 -2 -3\n-4 -5 -6\n  ...\n-n -n-1 -n-2 (press Enter and Ctrl+D to finish)')
 
 try:
-    matrices = [[[int(i) for i in line.strip().split()] for line in matrix.strip().split('\n')] for matrix in
+    matrices = [[[float(i) for i in line.strip().split()] for line in matrix.strip().split('\n')] for matrix in
                 sys.stdin.read().strip().split('---') if matrix]
     matrix_1, matrix_2 = tuple(matrices)
     check_matrix(matrix_1, 'A')
@@ -173,4 +141,3 @@ except TypeError:
     print('Invalid matrix format!')
 except ArithmeticError:
     print('It is impossible to multiply these matrices!')
-sys.exit(0)
