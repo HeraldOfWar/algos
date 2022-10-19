@@ -4,9 +4,9 @@ from questions import questions
 
 print("Добро пожаловать в игру Акинатор!")
 print("Загадайте студента из группы K3121 и Aкинатор его угадает!")
-print("Отвечайте на вопросы в формате: 'да' / 'нет'")
+print("Отвечайте на вопросы в формате: 'да' / 'нет'\n")
 
-student = range(len(students))  # список индексов студентов
+student = list(range(len(students)))  # список индексов студентов
 question = [i for i in questions.keys()]  # список ключей вопросов
 while len(student) != 1:
     n_question = randint(0, len(question) - 1)  # выбираем случайный вопрос

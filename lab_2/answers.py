@@ -364,7 +364,7 @@ students = [
         "anime": False,
     },
     {
-        "name": "Надери Мариам Шаховна ",
+        "name": "Надери Мариам Шаховна",
         "girl": True,
         "is18": True,
         "glasses": True,
@@ -416,7 +416,7 @@ students = [
         "anime": False,
     },
     {
-        "name": "Петрова Наталья Глебовна ",
+        "name": "Петрова Наталья Глебовна",
         "girl": True,
         "is18": True,
         "glasses": True,
@@ -520,7 +520,7 @@ students = [
         "anime": False,
     },
     {
-        "name": "Адрат Олеся Александровна ",
+        "name": "Адрат Олеся Александровна",
         "girl": True,
         "is18": True,
         "glasses": False,
