@@ -141,12 +141,12 @@ def invert_matrix(A, tol=None):
 
     indices = list(range(n))
     for fd in range(n):
-        fdScaler = 1 / AM[fd][fd]
-        for j in range(n):
+        fdScaler = 1.0 / AM[fd][fd]  # инверсия элемента на главной диагонали
+        for j in range(n):  # преобразование текущей строки
             AM[fd][j] *= fdScaler
             IM[fd][j] *= fdScaler
-        for i in indices[0:fd] + indices[fd + 1:]:
-            crScaler = AM[i][fd]
+        for i in indices[0:fd] + indices[fd + 1:]:  # преобразование остальных строк
+            crScaler = AM[i][fd]  # коэффициент
             for j in range(n):
                 AM[i][j] = AM[i][j] - crScaler * AM[fd][j]
                 IM[i][j] = IM[i][j] - crScaler * IM[fd][j]
@@ -171,6 +171,7 @@ try:
     print(f'The execution time of my inversion: {round(result, 5)}s.')
     print('Inversed matrix by numpy: ')
     print_matrix(np.linalg.inv(np.array(matrix)))
+    matrix = np.array(matrix)
     start_time = timeit.default_timer()
     np.linalg.inv(matrix)
     result = timeit.default_timer() - start_time
