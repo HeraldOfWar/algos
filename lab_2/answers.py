@@ -674,5 +674,5 @@ students = [
         "campus": False,
         "movies": True,
         "anime": True,
-    },
+    }
 ]
