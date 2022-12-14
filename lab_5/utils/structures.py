@@ -56,14 +56,13 @@ class DijkstraQueue(AbstractNodeStorageClass):
 
 class AStarQueue(AbstractNodeStorageClass):
     """
-        Очередь с приоритетом для алгоритма А*.
-        В методе get_first() выбирается узел, для которого минимальна
-        сумма расстояния до начального узла и оценки расстояния
-        (оценивается евклидова норма) до конечного узла.
+        Priority queue for AStar method.
+        In the get_first() method, a node is selected that has the minimum distance to the start node
+        and the minimum estimate (according to heuristics) to the end node.
     """
 
     def __init__(self, graph, distances, goal_node):
-        super().__init__()
+        self.nodes = []
         self.graph = graph
         self.x_goal, self.y_goal = graph.nodes[goal_node]['position']
         self.distances = distances
@@ -85,3 +84,6 @@ class AStarQueue(AbstractNodeStorageClass):
                  (self.distances[element] +
                   self.calc_heuristic(element), element)
                  )
+
+    def is_empty(self):
+        return len(self.nodes) == 0

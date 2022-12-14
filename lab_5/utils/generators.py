@@ -3,7 +3,7 @@ from lab_5.utils.structures import Graph, Stack, Queue, DijkstraQueue, AStarQueu
 from lab_5.utils.animations import GraphAnimator
 
 
-def generate_simple_graph() -> Graph:
+def generate_simple_graph(file) -> Graph:
     """
         Function generates small weighted graph.
     """
@@ -46,7 +46,7 @@ def generate_simple_graph() -> Graph:
     # with open("graph_for_task_2_1.json", "w") as outfile:
     #     outfile.write(json_object)
 
-    with open('utils/graphs/graph_for_task_2_1.json', 'r') as openfile:
+    with open(f'utils/graphs/{file}.json', 'r') as openfile:
         graph_info = json.load(openfile)
 
     graph = Graph()
@@ -89,7 +89,7 @@ def generate_maze_graph():
     maze.add_nodes_from(node_list)
     maze.add_weighted_edges_from(edge_list)
 
-    return maze, 113, 198, maze_list
+    return maze, 41, 49, maze_list
 
 
 def print_path(goal_node, parent):
