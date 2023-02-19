@@ -8,4 +8,4 @@ graph_animator = GraphAnimator(graph, start_node, target_node,
                                is_maze=True, maze_list=maze_list,
                                show_datastructure=False)
 
-find_path(graph, start_node, target_node, 'AStarQueue', graph_animator)
+find_path(graph, start_node, target_node, 'Queue', graph_animator)

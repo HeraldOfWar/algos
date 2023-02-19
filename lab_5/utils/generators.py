@@ -93,7 +93,6 @@ def generate_maze_graph():
 
 
 def print_path(goal_node, parent):
-
     current_node = goal_node
     path_string = str(goal_node)
     while current_node in parent:
