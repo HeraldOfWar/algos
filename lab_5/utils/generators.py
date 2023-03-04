@@ -99,4 +99,4 @@ def print_path(goal_node, parent):
         current_node = parent[current_node]
         path_string = str(current_node) + ' -> ' + path_string
     print(path_string)
-    return 0
+    return path_string
