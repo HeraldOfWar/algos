@@ -29,15 +29,10 @@ def dehash_multi(table: dict, hash_text: str) -> str:
     return result
 
 
-def hash_crc32(s: str) -> str:
-    return s
-
-
-s = input('Введите текст, который нужно захэшировать: ')
+s = input('Введите текст, который нужно хэшировать: ')
 hash_table = {}
-k, c = randint(1, 100), uniform(0, 1)
-print('Ключ:', str(k), ', константа:', str(c))
+k, c = randint(1, 50), uniform(0, 1)
+print('Ключ:', str(k), 'Константа:', str(c))
 hash_s = hash_multi(hash_table, k, c, s)
 print('Хэшированный текст (умножение):', hash_s)
 print('Исходный текст (умножение):', dehash_multi(hash_table, hash_s))
-print('Хэшированный текст (CRC-32):')
