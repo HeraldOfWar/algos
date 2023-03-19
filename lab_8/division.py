@@ -17,15 +17,19 @@ def dehash_div(table: dict, hash_text: str) -> str:
     i, curr_i = 0, 0
     while i < len(hash_text):
         if i == curr_i:
-            i += 1
             if int(hash_text[i]) in table.keys() and table[int(hash_text[i])]:
                 result += table[int(hash_text[i])].pop(0)
+                i += 1
                 curr_i = i
+            else:
+                i += 1
         else:
-            i += 1
             if int(hash_text[curr_i:i]) in table.keys() and table[int(hash_text[curr_i:i])]:
                 result += table[int(hash_text[curr_i:i])].pop(0)
+                i += 1
                 curr_i = i
+            else:
+                i += 1
     return result
 
 
