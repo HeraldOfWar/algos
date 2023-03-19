@@ -40,7 +40,7 @@ for _ in range(len(streets) - 1):
     paths[d1[y]].append(y)
 
 for i in range(1, len(streets)):
-    res, k = [0, i], i
+    res, k = [], i
     while k != 0:
         for key, item in paths.items():
             if k in item and key == 0:
@@ -48,8 +48,9 @@ for i in range(1, len(streets)):
                 break
             elif k in item:
                 k = key
-                res.insert(-2, k)
+                res.append(k)
                 break
+    res = [0] + res[::-1] + [i]
     res = list(map(lambda x: streets[x], res))
     print(' -> '.join(res))
 
