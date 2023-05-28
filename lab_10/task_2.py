@@ -9,4 +9,4 @@ for s in range(1, n):
         for k in range(i, j):
             dp[i][j] = min(dp[i][j], dp[i][k] + dp[k + 1][j] + p[i] * p[k + 1] * p[j + 1])
 
-print('Минимальное число скалрных операций:', dp[0][n - 1])
+print('Минимальное число скалярных операций:', dp[0][n - 1])
