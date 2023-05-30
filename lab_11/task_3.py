@@ -9,9 +9,9 @@ def queens(size):
         ss = [[]]
         for j in range(n):
             ss = [s + [i + 1] for s in ss for i in range(n) if not under_attack(i + 1, s)]
-            print(ss)
         return ss
 
+    print(f'Количество вариантов: {len(list(np.array(solve(size))))}')
     for i in np.array(solve(size)):
         np.sort(i)
         print(i)
